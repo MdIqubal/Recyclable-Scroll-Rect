@@ -14,6 +14,7 @@ namespace PolyAndCode.UI
         //DataSource. Responsible for Data related operations
         [HideInInspector]
         public IRecyclableScrollRectDataSource DataSource;
+
         //Cell
         public RectTransform PrototypeCell;
         public bool SelfInitialize = true;
@@ -40,15 +41,9 @@ namespace PolyAndCode.UI
             vertical = true;
             horizontal = false;
 
-            if (!Application.isPlaying)
-            {
-                return;
-            }
+            if (!Application.isPlaying) return;
 
-            if (SelfInitialize)
-            {
-                StartCoroutine(InitCoroutine());
-            }
+            if (SelfInitialize) StartCoroutine(InitCoroutine());
         }
 
         #region INIT
@@ -75,7 +70,9 @@ namespace PolyAndCode.UI
         /// </summary>
         IEnumerator InitCoroutine()
         {
-            onValueChanged.RemoveAllListeners();
+            onValueChanged.RemoveListener(OnValueChangedlistener);
+
+            //Setting up container and bounds
             if (!_listContainer)
             {
                 _listContainer = (new GameObject()).AddComponent<RectTransform>();
@@ -88,8 +85,8 @@ namespace PolyAndCode.UI
             yield return null;
             SetRecyclingBounds();
 
+            //Cell Poool
             CreateCellPool();
-            //Set the top and bottom most cell indices
             topMostCellIndex = 0;
             bottomMostCellIndex = _cellPool.Count - 1;
 
@@ -97,10 +94,10 @@ namespace PolyAndCode.UI
             float contentYSize = _cellPool.Count * PrototypeCell.sizeDelta.y;
             content.sizeDelta = new Vector2(content.sizeDelta.x, contentYSize);
             currentItemCount = _cellPool.Count;
-
             SetTopAnchor(content);
 
-            onValueChanged.AddListener(OnValueChanged);
+            //Add listener for recycling
+            onValueChanged.AddListener(OnValueChangedlistener);
         }
 
         /// <summary>
@@ -115,11 +112,11 @@ namespace PolyAndCode.UI
         }
 
         /// <summary>
-        /// Creates cell Pool for recycling
+        /// Creates cell Pool for recycling, Caches ICells
         /// </summary>
         private void CreateCellPool()
         {
-            //Caching ICells.
+            //Reseting Pool
             if (_cellPool != null)
             {
                 _cellPool.ForEach((RectTransform item) => Destroy(item.gameObject));
@@ -132,34 +129,37 @@ namespace PolyAndCode.UI
                 _cellPool = new List<RectTransform>();
             }
 
-            //Set the prototype cell active 
+            //Set the prototype cell active and set cell anchor as top 
             PrototypeCell.gameObject.SetActive(true);
-            //Set cell anchor as top
             SetTopAnchor(PrototypeCell);
 
             //Temps
-            float poolSize = 0;
+            float curretPoolCoverage = 0;
             int poolCount = 0;
             float posY = 0;
-            while (poolSize < _poolCoverage * viewport.rect.height && poolCount < DataSource.GetItemCount())
-            {
 
+            //Recycle cells untill the Pool area is covered
+            while (curretPoolCoverage < _poolCoverage * viewport.rect.height && poolCount < DataSource.GetItemCount())
+            {
+                //Instantiate and add to Pool
                 RectTransform item = (Instantiate(PrototypeCell.gameObject) as GameObject).GetComponent<RectTransform>();
-                item.GetComponentInChildren<Text>().text = poolCount.ToString();
                 _cellPool.Add(item);
                 item.SetParent(_listContainer, false);
 
-                item.anchoredPosition = new Vector2(0, posY);// - item.sizeDelta.y * 0.5f);
-                posY = item.anchoredPosition.y - item.rect.height;// * 0.5f;
+                //Positioning
+                item.anchoredPosition = new Vector2(0, posY);
+                posY = item.anchoredPosition.y - item.rect.height;
 
-                //Cell for row at
+                //Data setting in Cell
                 _cachedCells.Add(item.GetComponent<ICell>());
-                DataSource.SetCell(item.GetComponent<ICell>(), poolCount);
-                poolSize += item.rect.height;
+                DataSource.SetCell(_cachedCells[_cachedCells.Count - 1], poolCount);
+
+                //Update the Pool size
+                curretPoolCoverage += item.rect.height;
                 poolCount++;
             }
 
-            //Deactivate  prototype cell if it is not a prefab, meaning it's present in scene.
+            //Deactivate prototype cell if it is not a prefab(i.e it's present in scene)
             if (PrototypeCell.gameObject.scene.IsValid())
             {
                 PrototypeCell.gameObject.SetActive(false);
@@ -173,16 +173,13 @@ namespace PolyAndCode.UI
         /// <summary>
         /// Recycling tick
         /// </summary>
-        private void OnValueChanged(Vector2 args)
+        private void OnValueChangedlistener(Vector2 args)
         {
-            if (_recycling || _cellPool == null || _cellPool.Count == 0)
-            {
-                return;
-            }
+            if (_recycling || _cellPool == null || _cellPool.Count == 0) return;
 
             //Updating Recyclable view bounds since it can change with resolution changes.
             SetRecyclingBounds();
-
+        
             if (_cellPool[bottomMostCellIndex].minY() > _recyclableViewBounds.min.y)
             {
                 RecycleTopToBottom();
@@ -199,14 +196,13 @@ namespace PolyAndCode.UI
         private void RecycleTopToBottom()
         {
             _recycling = true;
+            
             int n = 0;
             float posY = 0;
             while (_cellPool[topMostCellIndex].minY() > _recyclableViewBounds.max.y && currentItemCount < DataSource.GetItemCount())
             {
-    
-                posY = _cellPool[bottomMostCellIndex].anchoredPosition.y - _cellPool[bottomMostCellIndex].sizeDelta.y;
-
                 //Move top cell to bottom
+                posY = _cellPool[bottomMostCellIndex].anchoredPosition.y - _cellPool[bottomMostCellIndex].sizeDelta.y;
                 _cellPool[topMostCellIndex].anchoredPosition = new Vector2(_cellPool[topMostCellIndex].anchoredPosition.x, posY);
 
                 //Cell for row at
@@ -214,7 +210,7 @@ namespace PolyAndCode.UI
 
                 //set new indices
                 bottomMostCellIndex = topMostCellIndex;
-                topMostCellIndex = (topMostCellIndex + 1) % _cellPool.Count;//  topMostCellIndex + 1 >= cellPool.Count ? 0 : ++topMostCellIndex;
+                topMostCellIndex = (topMostCellIndex + 1) % _cellPool.Count;
 
                 currentItemCount++;
                 n++;
@@ -224,6 +220,7 @@ namespace PolyAndCode.UI
             _listContainer.anchoredPosition += n * Vector2.up * _cellPool[topMostCellIndex].sizeDelta.y;
             content.anchoredPosition -= n * Vector2.up * _cellPool[topMostCellIndex].sizeDelta.y;
             m_ContentStartPosition += -new Vector2(0, n * _cellPool[topMostCellIndex].sizeDelta.y);
+
             _recycling = false;
         }
 
@@ -233,16 +230,16 @@ namespace PolyAndCode.UI
         private void RecycleBottomToTop()
         {
             _recycling = true;
+
             int n = 0;
             float posY = 0;
             while (_cellPool[bottomMostCellIndex].maxY() < _recyclableViewBounds.min.y && currentItemCount > _cellPool.Count)
             {
                 currentItemCount--;
                 n++;
-                
-                posY = _cellPool[topMostCellIndex].anchoredPosition.y + _cellPool[topMostCellIndex].sizeDelta.y;// * 0.5f;
 
                 //Move top cell to bottom
+                posY = _cellPool[topMostCellIndex].anchoredPosition.y + _cellPool[topMostCellIndex].sizeDelta.y;
                 _cellPool[bottomMostCellIndex].anchoredPosition = new Vector2(_cellPool[bottomMostCellIndex].anchoredPosition.x, posY);
 
                 //Cell for row at
@@ -250,7 +247,7 @@ namespace PolyAndCode.UI
 
                 //set new indices
                 topMostCellIndex = bottomMostCellIndex;
-                bottomMostCellIndex = (bottomMostCellIndex - 1 + _cellPool.Count) % _cellPool.Count;//  bottomMostCellIndex - 1 < 0 ? cellPool.Count-1 : --bottomMostCellIndex;//(bottomMostCellIndex - 1) % 10;//
+                bottomMostCellIndex = (bottomMostCellIndex - 1 + _cellPool.Count) % _cellPool.Count;
             }
 
             //Content anchor position adjustment.
@@ -271,7 +268,7 @@ namespace PolyAndCode.UI
         /// <param name="rectTransform"></param>
         void SetTopAnchor(RectTransform rectTransform)
         {
-            //Width and height changes if anchoring is change. save to reapply after anchoring
+            //Saving to reapply after anchoring. Width and height changes if anchoring is change. 
             float width = rectTransform.rect.width;
             float height = rectTransform.rect.height;
 
@@ -282,16 +279,9 @@ namespace PolyAndCode.UI
 
             //Reapply size
             rectTransform.sizeDelta = new Vector2(width, height);
-            //rectTransform.anchoredPosition = new Vector3(0, -rectTransform.sizeDelta.y * 0.5f);
         }
 
         #endregion
-
-        [UnityEditor.MenuItem("CONTEXT/Rigidbody/Double Mass")]
-        static void DoSomething()
-        {
-            Debug.Log("Doing Something...");
-        }
 
         /* 
             #region  TESTING

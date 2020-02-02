@@ -3,6 +3,7 @@
 //Website : Polyandcode.com 
 
 /// <summary>
+/// Interface for creating DataSource
 /// Recyclable Scroll Rect must be provided a Data source which must inherit from this.
 /// </summary>
 namespace PolyAndCode.UI

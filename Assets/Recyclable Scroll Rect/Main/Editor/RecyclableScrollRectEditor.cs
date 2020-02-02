@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿
+using UnityEngine.UI;
 using UnityEditor.AnimatedValues;
 using UnityEditor;
 
@@ -7,8 +8,7 @@ namespace PolyAndCode.UI
     [CustomEditor(typeof(RecyclableScrollRect), true)]
     [CanEditMultipleObjects]
     /// <summary>
-    ///   Custom Editor for the Recyclable ScrollRect Component.
-    ///   Moified Scroll rect custom editor for the ScrollRect-derived component.
+    /// Custom Editor for the Recyclable Scroll Rect Component which is derived from Scroll Rect.
     /// </summary>
 
 public class RecyclableScrollRectEditor : Editor {

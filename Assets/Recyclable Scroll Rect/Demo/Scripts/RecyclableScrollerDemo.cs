@@ -1,14 +1,20 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using PolyAndCode.UI;
 
 /// <summary>
-/// Demo controller class for Recyclable Scroll Rect. A controller class is 
-/// responsible for providing the scroll rect with datasource.
-/// Controller class can be any class. The only requirement for the class are 
-/// to inherit from  IRecyclableScrollRectDataSource and implement the interface methods
+/// Demo controller class for Recyclable Scroll Rect. 
+/// A controller class is responsible for providing the scroll rect with datasource. Any class can be a controller class. 
+/// The only requirement is to inherit from IRecyclableScrollRectDataSource and implement the interface methods
 /// </summary>
+
+//Dummy Data model for demostraion
+struct ContactInfo
+{
+    public string Name;
+    public string Gender;
+    public string id;
+}
 
 public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSource
 {
@@ -31,10 +37,7 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
     //Initialising _contactList with dummy data 
     private void InitData()
     {
-        if (_contactList != null)
-        {
-            _contactList.Clear();
-        }
+        if (_contactList != null) _contactList.Clear();
 
         string[] genders = { "Male", "Female" };
         for (int i = 0; i < _dataLength; i++)
@@ -48,6 +51,8 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
 
     }
 
+    #region DATA SOURCE
+
     /// <summary>
     /// implement GetItemCount and return list length.
     /// </summary>
@@ -56,7 +61,7 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
         return _contactList.Count;
     }
 
-     /// <summary>
+    /// <summary>
     /// implement setCellData to configure the cell. It is called by Recyclable Scroll Rect while recycling cells.
     /// </summary>
     public void SetCell(ICell cell, int index)
@@ -65,14 +70,9 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
         item.nameLabel.text = _contactList[index].Name;
         item.genderLabel.text = _contactList[index].Gender;
         item.idLabel.text = _contactList[index].id;
-
     }
+    
+    #endregion
 }
 
-//Dummy Data model for demostraion
-struct ContactInfo
-{
-    public string Name;
-    public string Gender;
-    public string id;
-}
+
