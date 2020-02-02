@@ -34,12 +34,12 @@
 <b>3. Cell class</b>  :  Once you create your desired Prototype cell, assign it to the <i>Recyclable Scroll Rect</i> component. Now you will need to create a <i>Cell</i> script and add it to the Prototype Cell. This script must be a <i>Monobehaviour</i> inheriting from <i>ICell</i>. The purpose of a Cell script is to confugure the cell as the list is scrolled or updated. You must keep reference to the UI items that are required to be updated according to your data source.
 <b>Check <i>DemoCell</i> class for reference</b>
 
-<b> 3. Datasource</b>  : The next step is to create a Datasource class. A Datasource is responsible for data related operations in the Recyclable scroll rect. These are the no of items in the list and how a cell should be configured according to the data. To create a Data source, extend your class with <i>IRecyclableScrollRectDataSource</i> and implement the GetItemCount and  SetCell Methods. <br>
+<b> 4. Datasource</b>  : The next step is to create a Datasource class. A Datasource is responsible for data related operations in the Recyclable scroll rect. These are the no of items in the list and how a cell should be configured according to the data. To create a Data source, extend your class with <i>IRecyclableScrollRectDataSource</i> and implement the GetItemCount and  SetCell Methods. <br>
     <b>• GetItemCount</b>  : This method is basically to tell the Recyclable ScrollRect  the length of the List.  <br>
     <b>• SetCell </b>: This method is responsible for configuring the cell UI according to your data. A cell is received as a parameter from which necessary UI configuration can be done. The recieved cell is of ICell type. Cast it to the inherited Cell type before using. 
 <b>Check <i>RecyclableScrollRectDemo</i> class for reference</b>
  
-<b>  4. Bindings</b>  : Once you are done with the creation of <i>Cell</i> and <i>Datasource</i>, the last step is to assign the datasource instance to the Recyclable Scroll Rect. The assignmnent must be done in <i>Awake</i> or before  Recyclable Scroll Rect's start. <b>Check <i>Awake</i> method in <i>RecyclableScrollRectDemo</i> class. </b>
+<b>  5. Bindings</b>  : Once you are done with the creation of <i>Cell</i> and <i>Datasource</i>, the last step is to assign the datasource instance to the Recyclable Scroll Rect. The assignmnent must be done in <i>Awake</i> or before  Recyclable Scroll Rect's start. <b>Check <i>Awake</i> method in <i>RecyclableScrollRectDemo</i> class. </b>
  
  
  <b> Others:</b> <br>
