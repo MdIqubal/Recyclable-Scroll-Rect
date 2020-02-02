@@ -2,7 +2,7 @@
  
  ## Summary
 
- Using the default scroll-rect to create lists with huge number of items results in a laggy performance.  Specially when creating a list with hundreds or thousands of elements it becomes impossible to use the scroll rect with the default approach i.e instantiating that many items. Recyclable scroll rect  reuses or recycles the least no of cells required to fill the viewport. As a result any number of items can be shown in the list without any performance hit. Currently only vertical single item list is supported. 
+ Using the default scroll-rect to create lists with huge number of items results in a laggy performance.  Specially when creating a list with hundreds or thousands of elements it becomes impossible to use the scroll rect with the default approach i.e instantiating that many items. Recyclable Scroll Rect  reuses or recycles the least number of cells required to fill the viewport. As a result any number of items can be shown in the list without any performance hit. Currently only vertical single item list is supported. 
  RoadMap (based on feedback):
  1. Horizontal list
  2. Gird view
