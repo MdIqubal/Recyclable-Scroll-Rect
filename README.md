@@ -1,14 +1,15 @@
 # Recyclable Scroll Rect
- 
+
+https://twitter.com/polyandcode<br>
+https://polyandcode.com || https://www.facebook.com/Polyandcode || https://www.instagram.com/polyandcode/
+
  ## Summary
 
- Using the default scroll-rect to create lists with huge number of items results in a laggy performance.  Specially when creating a list with hundreds or thousands of elements it becomes impossible to use the scroll rect with the default approach i.e instantiating that many items. Recyclable Scroll Rect  reuses or recycles the least number of cells required to fill the viewport. As a result any number of items can be shown in the list without any performance hit. Currently only vertical single item list is supported. 
+ Using the default Scroll-Rect to create lists with huge number of items results in a laggy performance. Specially when creating a list with hundreds or thousands of items it becomes impossible to use the scroll rect with the default approach i.e instantiating that many items. Recyclable Scroll Rect reuses or recycles the least number of cells required to fill the viewport. As a result a huge number of items can be shown in the list without any performance hit. Currently only vertical single item list is supported. 
  RoadMap (based on feedback):
  1. Horizontal list
  2. Gird view
  3. Content size fitting.
-
-
 
 
 | Recycling  | Comparison with Default approach |
@@ -40,7 +41,6 @@
 <b>Check <i>RecyclableScrollRectDemo</i> class for reference</b>
  
 <b>  5. Bindings</b>  : Once you are done with the creation of <i>Cell</i> and <i>Datasource</i>, the last step is to assign the datasource instance to the Recyclable Scroll Rect. The assignmnent must be done in <i>Awake</i> or before  Recyclable Scroll Rect's start. <b>Check <i>Awake</i> method in <i>RecyclableScrollRectDemo</i> class. </b>
- 
  
  <b> Others:</b> <br>
  <b>Self Initiaze</b> : The <i>Recyclable Scroll Rect</i> initializes on its own in it's <i>Start</i> method. If you wish to initialize it yourself you can turn off component's <i>self initialize</i> property and call the <i>Initialize</i> method whenever required.
