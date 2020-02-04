@@ -9,7 +9,7 @@ using PolyAndCode.UI;
 /// </summary>
 
 //Dummy Data model for demostraion
-struct ContactInfo
+public struct ContactInfo
 {
     public string Name;
     public string Gender;
@@ -48,7 +48,6 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
             obj.id = "item : " + i;
             _contactList.Add(obj);
         }
-
     }
 
     #region DATA SOURCE
@@ -62,14 +61,13 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
     }
 
     /// <summary>
-    /// implement setCellData to configure the cell. It is called by Recyclable Scroll Rect while recycling cells.
+    /// Called every time a cell is recycled
+    /// Implement setCellData to configure the cell. It is called by Recyclable Scroll Rect while recycling cells.
     /// </summary>
     public void SetCell(ICell cell, int index)
     {
         var item = cell as DemoCell;
-        item.nameLabel.text = _contactList[index].Name;
-        item.genderLabel.text = _contactList[index].Gender;
-        item.idLabel.text = _contactList[index].id;
+        item.ConfigureCell(_contactList[index],index);
     }
     
     #endregion
