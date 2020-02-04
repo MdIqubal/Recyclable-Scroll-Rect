@@ -50,10 +50,10 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
         }
     }
 
-    #region DATA SOURCE
+    #region DATA-SOURCE
 
     /// <summary>
-    /// implement GetItemCount and return list length.
+    /// Data source method. return the list length.
     /// </summary>
     public int GetItemCount()
     {
@@ -61,11 +61,12 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
     }
 
     /// <summary>
-    /// Called every time a cell is recycled
-    /// Implement setCellData to configure the cell. It is called by Recyclable Scroll Rect while recycling cells.
+    /// Data source method. Called for a cell every time it is recycled.
+    /// Implement this method to do the necessary cell configuration.
     /// </summary>
     public void SetCell(ICell cell, int index)
     {
+        //Casting to the implemented Cell
         var item = cell as DemoCell;
         item.ConfigureCell(_contactList[index],index);
     }

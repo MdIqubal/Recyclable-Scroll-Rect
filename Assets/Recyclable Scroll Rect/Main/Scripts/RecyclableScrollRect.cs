@@ -143,6 +143,7 @@ namespace PolyAndCode.UI
             {
                 //Instantiate and add to Pool
                 RectTransform item = (Instantiate(PrototypeCell.gameObject) as GameObject).GetComponent<RectTransform>();
+                item.name = "Cell";
                 _cellPool.Add(item);
                 item.SetParent(_listContainer, false);
 
