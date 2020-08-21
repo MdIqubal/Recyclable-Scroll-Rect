@@ -1,0 +1,106 @@
+D:\GitHub-Projects\Recyclable-Scroll-Rect\Assets\Recyclable Scroll Rect\Demo\Scripts\DemoCell.cs
+Start 124
+Start 125
+ConfigureCell 17
+ConfigureCell 15
+ButtonListener 6
+ButtonListener 15
+
+D:\GitHub-Projects\Recyclable-Scroll-Rect\Assets\Recyclable Scroll Rect\Demo\Scripts\RecyclableScrollerDemo.cs
+Awake 3
+Awake 0
+InitData 20
+InitData 15
+GetItemCount 7
+GetItemCount 15
+SetCell 4
+SetCell 0
+
+D:\GitHub-Projects\Recyclable-Scroll-Rect\Assets\Recyclable Scroll Rect\Main\Editor1\RecyclableScrollRectEditor.cs
+OnEnable 6
+OnEnable 15
+OnDisable 3
+OnDisable 0
+SetAnimBools 6
+SetAnimBools 0
+SetAnimBool 3
+SetAnimBool 0
+OnInspectorGUI 3
+OnInspectorGUI 0
+
+D:\GitHub-Projects\Recyclable-Scroll-Rect\Assets\Recyclable Scroll Rect\Main\Editor1\RecyclableScrollViewEditorTool.cs
+createRecyclableScrollView 2
+createRecyclableScrollView 0
+
+D:\GitHub-Projects\Recyclable-Scroll-Rect\Assets\Recyclable Scroll Rect\Main\Scripts\HorizontalRecyclingSystem.cs
+InitCoroutine 3
+InitCoroutine 0
+SetRecyclingBounds 4
+SetRecyclingBounds 0
+CreateCellPool 3
+CreateCellPool 0
+OnValueChangedListener 2
+OnValueChangedListener 0
+RecycleLeftToRight 2
+RecycleLeftToRight 0
+RecycleRightToleft 2
+RecycleRightToleft 0
+SetAnchor 2
+SetAnchor 0
+
+D:\GitHub-Projects\Recyclable-Scroll-Rect\Assets\Recyclable Scroll Rect\Main\Scripts\ICell.cs
+
+D:\GitHub-Projects\Recyclable-Scroll-Rect\Assets\Recyclable Scroll Rect\Main\Scripts\IRecyclableScrollRectDataSource.cs
+GetItemCount 2
+GetItemCount 0
+SetCell 2
+SetCell 0
+
+D:\GitHub-Projects\Recyclable-Scroll-Rect\Assets\Recyclable Scroll Rect\Main\Scripts\RecyclableScrollRect.cs
+Start 3
+Start 0
+Initialize 2
+Initialize 0
+Initialize 2
+Initialize 0
+OnValueChangedListener 4
+OnValueChangedListener 0
+OnDrawGizmos 3
+OnDrawGizmos 0
+
+D:\GitHub-Projects\Recyclable-Scroll-Rect\Assets\Recyclable Scroll Rect\Main\Scripts\RecyclingSystem.cs
+InitCoroutine 2
+InitCoroutine 0
+OnValueChangedListener 1
+OnValueChangedListener 0
+
+D:\GitHub-Projects\Recyclable-Scroll-Rect\Assets\Recyclable Scroll Rect\Main\Scripts\UIExtension.cs
+MaxY 4
+MaxY 0
+MinY 3
+MinY 15
+MaxX 3
+MaxX 0
+MinX 2
+MinX 0
+
+D:\GitHub-Projects\Recyclable-Scroll-Rect\Assets\Recyclable Scroll Rect\Main\Scripts\VerticalRecyclingSystem.cs
+InitCoroutine 3
+InitCoroutine 0
+SetRecyclingBounds 4
+SetRecyclingBounds 15
+CreateCellPool 3
+CreateCellPool 0
+OnValueChangedListener 2
+OnValueChangedListener 0
+RecycleTopToBottom 3
+RecycleTopToBottom 0
+RecycleBottomToTop 4
+RecycleBottomToTop 0
+SetTopAnchor 6
+SetTopAnchor 0
+SetTopLeftAnchor 5
+SetTopLeftAnchor 0
+OnDrawGizmos 5
+OnDrawGizmos 0
+

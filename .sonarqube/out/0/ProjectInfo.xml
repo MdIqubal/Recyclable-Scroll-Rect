@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>Assembly-CSharp</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>0a647104-cc21-1778-45e9-902245a3dfd1</ProjectGuid>
+  <FullPath>D:\GitHub-Projects\Recyclable-Scroll-Rect\Assembly-CSharp.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="D:\GitHub-Projects\Recyclable-Scroll-Rect\.sonarqube\out\0\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePath">D:\GitHub-Projects\Recyclable-Scroll-Rect\Temp\bin\Debug\Assembly-CSharp.dll.RoslynCA.json|D:\GitHub-Projects\Recyclable-Scroll-Rect\Temp\bin\Debug\Assembly-CSharp.dll.RoslynCA.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPath">D:\GitHub-Projects\Recyclable-Scroll-Rect\.sonarqube\out\0</Property>
+  </AnalysisSettings>
+  <Configuration>Debug</Configuration>
+  <Platform>AnyCPU</Platform>
+</ProjectInfo>

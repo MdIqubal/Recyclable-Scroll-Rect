@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465934, g: 0.49642956, b: 0.57482487, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _recyclableScrollRect: {fileID: 1611037273}
-  _dataLength: 123
+  _dataLength: 52
 --- !u!4 &440737019
 Transform:
   m_ObjectHideFlags: 0
@@ -187,7 +187,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -70.4, y: 13.700001}
+  m_AnchoredPosition: {x: -70.4, y: 13.700012}
   m_SizeDelta: {x: 102.41, y: 17.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &495670913
@@ -424,7 +424,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -70.39999, y: -11.7}
+  m_AnchoredPosition: {x: -70.39999, y: -11.700012}
   m_SizeDelta: {x: 102.41, y: 17.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1226722464
@@ -643,8 +643,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -28.00002, y: -7.0892754}
-  m_SizeDelta: {x: 200, y: 343.7}
+  m_AnchoredPosition: {x: 109.7, y: -7.0892754}
+  m_SizeDelta: {x: 468.1, y: 343.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1611037273
 MonoBehaviour:
@@ -658,8 +658,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 1666538606}
-  m_Horizontal: 0
-  m_Vertical: 1
+  m_Horizontal: 1
+  m_Vertical: 0
   m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1
@@ -677,6 +677,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  Grid: 1
+  Direction: 0
+  _segments: 3
   PrototypeCell: {fileID: 1915402786}
   SelfInitialize: 1
 --- !u!114 &1611037274
@@ -743,8 +746,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000015258789, y: -0.00002038905}
-  m_SizeDelta: {x: 0, y: -253.4}
+  m_AnchoredPosition: {x: -0.000015258789, y: 0}
+  m_SizeDelta: {x: -199.45444, y: -37}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1722765083
 GameObject:
@@ -857,8 +860,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -24.2}
-  m_SizeDelta: {x: 0, y: 48.3}
+  m_AnchoredPosition: {x: -82.1, y: -45.3}
+  m_SizeDelta: {x: -164.2, y: 90.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1915402787
 MonoBehaviour:
@@ -1047,8 +1050,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: 172}
-  m_SizeDelta: {x: 200, y: 344}
+  m_AnchoredPosition: {x: -234.05, y: 172}
+  m_SizeDelta: {x: 468.1, y: 344}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2093823301
 MonoBehaviour:

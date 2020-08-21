@@ -1,7 +1,7 @@
-﻿
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using UnityEditor.AnimatedValues;
 using UnityEditor;
+using UnityEngine;
 
 namespace PolyAndCode.UI
 {
@@ -11,7 +11,8 @@ namespace PolyAndCode.UI
     /// Custom Editor for the Recyclable Scroll Rect Component which is derived from Scroll Rect.
     /// </summary>
 
-public class RecyclableScrollRectEditor : Editor {
+    public class RecyclableScrollRectEditor : Editor
+    {
         SerializedProperty m_Content;
         SerializedProperty m_MovementType;
         SerializedProperty m_Elasticity;
@@ -21,27 +22,36 @@ public class RecyclableScrollRectEditor : Editor {
         SerializedProperty m_Viewport;
         SerializedProperty m_OnValueChanged;
 
-		//inherited
-		SerializedProperty m_Cell;
-        SerializedProperty m_SelfInitialize;
+        //inherited
+        SerializedProperty _protoTypeCell;
+        SerializedProperty _selfInitialize;
+        SerializedProperty _direction;
+        SerializedProperty _type;
+        SerializedProperty _segments;
 
         AnimBool m_ShowElasticity;
         AnimBool m_ShowDecelerationRate;
-       
+
+        RecyclableScrollRect _script;
         protected virtual void OnEnable()
         {
-            m_Content               = serializedObject.FindProperty("m_Content");
-            m_MovementType          = serializedObject.FindProperty("m_MovementType");
-            m_Elasticity            = serializedObject.FindProperty("m_Elasticity");
-            m_Inertia               = serializedObject.FindProperty("m_Inertia");
-            m_DecelerationRate      = serializedObject.FindProperty("m_DecelerationRate");
-            m_ScrollSensitivity     = serializedObject.FindProperty("m_ScrollSensitivity");
-            m_Viewport              = serializedObject.FindProperty("m_Viewport");
-            m_OnValueChanged        = serializedObject.FindProperty("m_OnValueChanged");
-			
-			//Inherited
-			m_Cell        = serializedObject.FindProperty("PrototypeCell");
-            m_SelfInitialize        = serializedObject.FindProperty("SelfInitialize");
+            _script = (RecyclableScrollRect)target;
+
+            m_Content = serializedObject.FindProperty("m_Content");
+            m_MovementType = serializedObject.FindProperty("m_MovementType");
+            m_Elasticity = serializedObject.FindProperty("m_Elasticity");
+            m_Inertia = serializedObject.FindProperty("m_Inertia");
+            m_DecelerationRate = serializedObject.FindProperty("m_DecelerationRate");
+            m_ScrollSensitivity = serializedObject.FindProperty("m_ScrollSensitivity");
+            m_Viewport = serializedObject.FindProperty("m_Viewport");
+            m_OnValueChanged = serializedObject.FindProperty("m_OnValueChanged");
+
+            //Inherited
+            _protoTypeCell = serializedObject.FindProperty("PrototypeCell");
+            _selfInitialize = serializedObject.FindProperty("SelfInitialize");
+            _direction = serializedObject.FindProperty("Direction");
+            _type = serializedObject.FindProperty("Grid");
+            _segments = serializedObject.FindProperty("_segments");
 
             m_ShowElasticity = new AnimBool(Repaint);
             m_ShowDecelerationRate = new AnimBool(Repaint);
@@ -68,23 +78,25 @@ public class RecyclableScrollRectEditor : Editor {
                 a.target = value;
         }
 
-        void CalculateCachedValues()
-        {
-            
-        }
-
         public override void OnInspectorGUI()
         {
-            SetAnimBools(false);
-
+            SetAnimBools(false); 
             serializedObject.Update();
-            // Once we have a reliable way to know if the object changed, only re-cache in that case.
-            CalculateCachedValues();
+          
+            //EditorGUILayout.PropertyField()
+            EditorGUILayout.PropertyField(_direction); 
+            EditorGUILayout.PropertyField(_type);
+            if (_type.boolValue)
+            {
+               // Debug.Log(_direction.enumValueIndex)
+                string title = _direction.enumValueIndex == (int)RecyclableScrollRect.DirectionType.Vertical ? "Coloumns" : "Rows";
+               _script.Segments =  EditorGUILayout.IntField(title, _script.Segments);
+            }
 
-            EditorGUILayout.PropertyField(m_SelfInitialize);
+            EditorGUILayout.PropertyField(_selfInitialize);
             EditorGUILayout.PropertyField(m_Viewport);
             EditorGUILayout.PropertyField(m_Content);
-			EditorGUILayout.PropertyField(m_Cell);
+            EditorGUILayout.PropertyField(_protoTypeCell);
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(m_MovementType);
