@@ -238,7 +238,7 @@ namespace PolyAndCode.UI
         /// <summary>
         /// Recycling tick
         /// </summary>
-        public override Vector2 OnValueChangedListener(Vector2 args)
+        public override Vector2 OnValueChangedListener(Vector2 direction)
         {
             if (_recycling || _cellPool == null || _cellPool.Count == 0) return zeroVector ;
           
@@ -260,14 +260,14 @@ namespace PolyAndCode.UI
             //Updating Recyclable view bounds since it can change with resolution changes.
             SetRecyclingBounds();
           //  _offsetCorrection = zeroVector;
-            if (_cellPool[bottomMostCellIndex].MinY() > _recyclableViewBounds.min.y)
+            if (direction.y > 0 && _cellPool[bottomMostCellIndex].MaxY() > _recyclableViewBounds.min.y)
             {
               //  RecycleTopToBottom(out _offsetCorrection);
                 //RecycleTopToBottom((Vector2 offset) => contentOffset = offset );
 
                  return RecycleTopToBottom();
             }
-            else if (_cellPool[topMostCellIndex].MaxY() < _recyclableViewBounds.max.y)
+            else if (direction.y < 0 && _cellPool[topMostCellIndex].MinY() < _recyclableViewBounds.max.y)
             {
                 Debug.Log("bottom to top");
                 Debug.Log("index" + topMostCellIndex);

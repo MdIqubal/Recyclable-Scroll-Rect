@@ -91,7 +91,7 @@ namespace PolyAndCode.UI
 
         public void OnValueChangedListener(Vector2 args)
         {
-            m_ContentStartPosition += recyclableScrollRect.OnValueChangedListener(args);
+            m_ContentStartPosition += recyclableScrollRect.OnValueChangedListener(velocity);
         }
 
         #region Testing
