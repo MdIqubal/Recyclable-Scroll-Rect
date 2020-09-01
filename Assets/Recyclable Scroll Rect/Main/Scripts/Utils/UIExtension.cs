@@ -9,32 +9,30 @@ using UnityEngine;
 /// </summary>
 public static class UIExtension
 {
-    public static float MaxY(this RectTransform rectTransform)
+    public static Vector3[] GetCorners(this RectTransform rectTransform)
     {
         Vector3[] corners = new Vector3[4];
         rectTransform.GetWorldCorners(corners);
-        return corners[1].y;
+        return corners;
+    }
+    public static float MaxY(this RectTransform rectTransform)
+    {
+        return rectTransform.GetCorners()[1].y;
     }
 
     public static float MinY(this RectTransform rectTransform)
     {
-        Vector3[] corners = new Vector3[4];
-        rectTransform.GetWorldCorners(corners);
-        return corners[0].y;
+        return rectTransform.GetCorners()[0].y;
     }
 
     public static float MaxX(this RectTransform rectTransform)
     {
-        Vector3[] corners = new Vector3[4];
-        rectTransform.GetWorldCorners(corners);
-        return corners[2].x;
+        return rectTransform.GetCorners()[2].x;
     }
 
     public static float MinX(this RectTransform rectTransform)
     {
-        Vector3[] corners = new Vector3[4];
-        rectTransform.GetWorldCorners(corners);
-        return corners[0].x;
+        return rectTransform.GetCorners()[0].x;
     }
 
 }

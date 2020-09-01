@@ -1,4 +1,8 @@
-﻿using UnityEngine.UI;
+﻿//MIT License
+//Copyright (c) 2020 Mohammed Iqubal Hussain
+//Website : Polyandcode.com 
+
+using UnityEngine.UI;
 using UnityEditor.AnimatedValues;
 using UnityEditor;
 using UnityEngine;
@@ -27,7 +31,6 @@ namespace PolyAndCode.UI
         SerializedProperty _selfInitialize;
         SerializedProperty _direction;
         SerializedProperty _type;
-        SerializedProperty _segments;
 
         AnimBool m_ShowElasticity;
         AnimBool m_ShowDecelerationRate;
@@ -50,8 +53,7 @@ namespace PolyAndCode.UI
             _protoTypeCell = serializedObject.FindProperty("PrototypeCell");
             _selfInitialize = serializedObject.FindProperty("SelfInitialize");
             _direction = serializedObject.FindProperty("Direction");
-            _type = serializedObject.FindProperty("Grid");
-            _segments = serializedObject.FindProperty("_segments");
+            _type = serializedObject.FindProperty("IsGrid");
 
             m_ShowElasticity = new AnimBool(Repaint);
             m_ShowDecelerationRate = new AnimBool(Repaint);
@@ -67,7 +69,7 @@ namespace PolyAndCode.UI
         void SetAnimBools(bool instant)
         {
             SetAnimBool(m_ShowElasticity, !m_MovementType.hasMultipleDifferentValues && m_MovementType.enumValueIndex == (int)ScrollRect.MovementType.Elastic, instant);
-            SetAnimBool(m_ShowDecelerationRate, !m_Inertia.hasMultipleDifferentValues && m_Inertia.boolValue == true, instant);
+            SetAnimBool(m_ShowDecelerationRate, !m_Inertia.hasMultipleDifferentValues && m_Inertia.boolValue, instant);
         }
 
         void SetAnimBool(AnimBool a, bool value, bool instant)
@@ -83,12 +85,10 @@ namespace PolyAndCode.UI
             SetAnimBools(false); 
             serializedObject.Update();
           
-            //EditorGUILayout.PropertyField()
-            EditorGUILayout.PropertyField(_direction); 
-            EditorGUILayout.PropertyField(_type);
+            EditorGUILayout.PropertyField(_direction);
+            EditorGUILayout.PropertyField(_type, new GUIContent("Grid"));
             if (_type.boolValue)
             {
-               // Debug.Log(_direction.enumValueIndex)
                 string title = _direction.enumValueIndex == (int)RecyclableScrollRect.DirectionType.Vertical ? "Coloumns" : "Rows";
                _script.Segments =  EditorGUILayout.IntField(title, _script.Segments);
             }

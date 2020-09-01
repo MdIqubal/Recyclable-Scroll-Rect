@@ -9,12 +9,12 @@ namespace PolyAndCode.UI
         const string PrefabPath = "Assets/Recyclable Scroll Rect/Main/Prefab/Recyclable Scroll View.prefab";
 
         [MenuItem("GameObject/UI/Recyclable Scroll View")]
-        private static void createRecyclableScrollView()
+        private static void CreateRecyclableScrollView()
         {
             GameObject selected = Selection.activeGameObject;
 
             //If selected isn't a UI gameobject then find a Canvas
-            if (!selected || selected.transform.GetType() != typeof(RectTransform))
+            if (!selected || !(selected.transform is RectTransform))
             {
                 selected = GameObject.FindObjectOfType<Canvas>().gameObject;
             }
@@ -23,7 +23,7 @@ namespace PolyAndCode.UI
 
             GameObject asset = AssetDatabase.LoadAssetAtPath(PrefabPath, typeof(GameObject)) as GameObject;
 
-            GameObject item = UnityEngine.Object.Instantiate(asset) as GameObject;
+            GameObject item = Object.Instantiate(asset);
             item.name = "Recyclable Scroll View";
 
             item.transform.SetParent(selected.transform);
