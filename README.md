@@ -4,12 +4,9 @@ https://twitter.com/polyandcode<br>
 https://polyandcode.com || https://www.facebook.com/Polyandcode || https://www.instagram.com/polyandcode/
 
  ## Summary
+<b>UPDATE : Recyclable Scroll Rect now supports Horizontal and Grid layout.</b><br><br>
+Using the default Scroll-Rect to create lists with a huge number of items results in a laggy performance. Especially when creating a list with hundreds or thousands of items, it becomes impossible to use the Scroll Rect with the default approach i.e instantiating that many items. <i>Recyclable Scroll Rect</i> reuses or recycles the least number of cells required to fill the viewport. As a result, a huge number of items can be shown in the list without any performance hit. Vertical, Horizontal and Grid layouts are supported. 
 
-Using the default Scroll-Rect to create lists with a huge number of items results in a laggy performance. Especially when creating a list with hundreds or thousands of items, it becomes impossible to use the Scroll Rect with the default approach i.e instantiating that many items. <i>Recyclable Scroll Rect</i> reuses or recycles the least number of cells required to fill the viewport. As a result, a huge number of items can be shown in the list without any performance hit. Currently, only vertical list is supported. 
- RoadMap (based on feedback):
- 1. Horizontal layout
- 2. Grid layout
- 3. Content size fitting
 
 
 | Recycling  | Comparison with Default approach |
@@ -18,7 +15,7 @@ Using the default Scroll-Rect to create lists with a huge number of items result
 
 ## Quickstart Guide :
 
- <b>Check the Demo scene for a complete example </b> <br><br>
+ <b>Check the Demo scenes for a complete example </b> <br><br>
  The usage and structure are similar to Native iOS <i>TableViewController</i>. There are mainly two parts in setting up a Recyclable Scroll Rect; Prototype cell and DataSource. Following are the steps to set up a <i>Recyclable Scroll Rect</i> in detail:
  
 1. Recyclable Scroll View
@@ -31,8 +28,9 @@ Using the default Scroll-Rect to create lists with a huge number of items result
 <img src="https://imgur.com/Bxjdvlw.gif" width="400" align="centre">
 <br>
 
-<b>2. Prototype Cell</b>: As the name says, a Prototype cell is basically the cell layout for your list. A prototype cell can be in the hierarchy as the content's child or it can be a prefab. Don’t worry about disabling it if it is present in the hierarchy, it will not show up in play mode. The prototype cell must be assigned to the <i>Recyclable Scroll Rect</i>. When you create a <i>Recyclable Scroll View</i> from the menu, a prototype cell will already be present in the content. You can delete it to create your own or modify it according to your requirements.
- ![Imgur Image](https://imgur.com/lmyaLSo.png)
+<b>2. Prototype Cell</b>: A Prototype cell is basically the cell layout for your list. A prototype cell can be in the hierarchy as the content's child or it can be a prefab. Don’t worry about disabling it if it is present in the hierarchy, it will not show up in play mode. The prototype cell must be assigned to the <i>Recyclable Scroll Rect</i><br>
+<img src="https://imgur.com/v5e4nG7.png" width="300" align="centre">
+
 
 <b>3. Cell class</b>: Once you create your desired Prototype cell, assign it to the <i>Recyclable Scroll Rect</i> component. Now you will need to create a <i>Cell</i> script and attach it to the Prototype Cell. This script must be a <i>Monobehaviour</i> implementing <i>ICell</i> interface. The purpose of a Cell script is to configure the cell as the list is scrolled or updated. You must keep reference to the UI items that are required to be updated according to your data source.
 <b>Check <i>DemoCell</i> class for reference</b>
