@@ -47,6 +47,7 @@ namespace PolyAndCode.UI
         private int _segments;
 
         private RecyclingSystem _recyclableScrollRect;
+        private Vector2 _prevAnchoredPos;
 
         protected override void Start()
         {
@@ -77,6 +78,7 @@ namespace PolyAndCode.UI
             vertical = Direction == DirectionType.Vertical;
             horizontal = Direction == DirectionType.Horizontal;
 
+            _prevAnchoredPos = content.anchoredPosition;
             onValueChanged.RemoveListener(OnValueChangedListener);
             //Adding listener after pool creation to avoid any unwanted recycling behaviour.(rare scenerio)
             StartCoroutine(_recyclableScrollRect.InitCoroutine(() =>
@@ -98,9 +100,11 @@ namespace PolyAndCode.UI
         /// Recycling entry point for recyling systems.
         /// </summary>
         /// <param name="direction">scroll direction</param>
-        public void OnValueChangedListener(Vector2 direction)
+        public void OnValueChangedListener(Vector2 normalizedPos)
         {
-            m_ContentStartPosition += _recyclableScrollRect.OnValueChangedListener(velocity);
+            Vector2 dir = content.anchoredPosition - _prevAnchoredPos;
+            m_ContentStartPosition += _recyclableScrollRect.OnValueChangedListener(dir);
+            _prevAnchoredPos = content.anchoredPosition;
         }
 
         /*
