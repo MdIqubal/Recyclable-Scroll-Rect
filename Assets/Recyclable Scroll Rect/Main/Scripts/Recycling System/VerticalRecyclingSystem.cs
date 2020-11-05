@@ -16,7 +16,6 @@ namespace PolyAndCode.UI
     public class VerticalRecyclingSystem : RecyclingSystem
     {
         //Assigned by constructor
-        private readonly IRecyclableScrollRectDataSource _dataSource;
         private readonly int _coloumns;
 
         //Cell dimensions
@@ -45,7 +44,7 @@ namespace PolyAndCode.UI
             PrototypeCell = prototypeCell;
             Viewport = viewport;
             Content = content;
-            _dataSource = dataSource;
+            DataSource = dataSource;
             IsGrid = isGrid;
             _coloumns = isGrid ? coloumns : 1;
             _recyclableViewBounds = new Bounds();
@@ -119,6 +118,9 @@ namespace PolyAndCode.UI
                 SetTopAnchor(PrototypeCell);
             }
 
+            //Reset
+            _topMostCellColoumn = _bottomMostCellColoumn = 0;
+
             //Temps
             float currentPoolCoverage = 0;
             int poolSize = 0;
@@ -131,10 +133,10 @@ namespace PolyAndCode.UI
 
             //Get the required pool coverage and mininum size for the Cell pool
             float requriedCoverage = MinPoolCoverage * Viewport.rect.height;
-            int minPoolSize = Math.Min(MinPoolSize, _dataSource.GetItemCount());
+            int minPoolSize = Math.Min(MinPoolSize, DataSource.GetItemCount());
 
             //create cells untill the Pool area is covered and pool size is the minimum required
-            while ((poolSize < minPoolSize || currentPoolCoverage < requriedCoverage) && poolSize < _dataSource.GetItemCount())
+            while ((poolSize < minPoolSize || currentPoolCoverage < requriedCoverage) && poolSize < DataSource.GetItemCount())
             {
                 //Instantiate and add to Pool
                 RectTransform item = (UnityEngine.Object.Instantiate(PrototypeCell.gameObject)).GetComponent<RectTransform>();
@@ -163,7 +165,7 @@ namespace PolyAndCode.UI
 
                 //Setting data for Cell
                 _cachedCells.Add(item.GetComponent<ICell>());
-                _dataSource.SetCell(_cachedCells[_cachedCells.Count - 1], poolSize);
+                DataSource.SetCell(_cachedCells[_cachedCells.Count - 1], poolSize);
 
                 //Update the Pool size
                 poolSize++;
@@ -222,7 +224,7 @@ namespace PolyAndCode.UI
             //to determine if content size needs to be updated
             int additionalRows = 0;
             //Recycle until cell at Top is avaiable and current item count smaller than datasource
-            while (_cellPool[topMostCellIndex].MinY() > _recyclableViewBounds.max.y && currentItemCount < _dataSource.GetItemCount())
+            while (_cellPool[topMostCellIndex].MinY() > _recyclableViewBounds.max.y && currentItemCount < DataSource.GetItemCount())
             {
                 if (IsGrid)
                 {
@@ -252,7 +254,7 @@ namespace PolyAndCode.UI
                 }
 
                 //Cell for row at
-                _dataSource.SetCell(_cachedCells[topMostCellIndex], currentItemCount);
+                DataSource.SetCell(_cachedCells[topMostCellIndex], currentItemCount);
 
                 //set new indices
                 bottomMostCellIndex = topMostCellIndex;
@@ -267,7 +269,8 @@ namespace PolyAndCode.UI
             {
                 Content.sizeDelta += additionalRows * Vector2.up * _cellHeight;
                 //TODO : check if it is supposed to be done only when > 0
-                if (additionalRows > 0) {
+                if (additionalRows > 0)
+                {
                     n -= additionalRows;
                 }
             }
@@ -328,7 +331,7 @@ namespace PolyAndCode.UI
                 currentItemCount--;
 
                 //Cell for row at
-                _dataSource.SetCell(_cachedCells[bottomMostCellIndex], currentItemCount - _cellPool.Count);
+                DataSource.SetCell(_cachedCells[bottomMostCellIndex], currentItemCount - _cellPool.Count);
 
                 //set new indices
                 topMostCellIndex = bottomMostCellIndex;
@@ -350,7 +353,7 @@ namespace PolyAndCode.UI
             _recycling = false;
             return new Vector2(0, n * _cellPool[topMostCellIndex].sizeDelta.y);
         }
-#endregion
+        #endregion
 
         #region  HELPERS
         /// <summary>

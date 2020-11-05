@@ -12,6 +12,8 @@ namespace PolyAndCode.UI
     /// </summary>
     public abstract class RecyclingSystem
     {
+        public IRecyclableScrollRectDataSource DataSource;
+
         protected RectTransform Viewport, Content;
         protected RectTransform PrototypeCell;
         protected bool IsGrid;
@@ -20,7 +22,7 @@ namespace PolyAndCode.UI
         protected int MinPoolSize = 10; // Cell pool must have a min size
         protected float RecyclingThreshold = .2f; //Threshold for recycling above and below viewport
 
-        public abstract IEnumerator InitCoroutine(System.Action onInitialized);
+        public abstract IEnumerator InitCoroutine(System.Action onInitialized = null);
 
         public abstract Vector2 OnValueChangedListener(Vector2 direction);
     }

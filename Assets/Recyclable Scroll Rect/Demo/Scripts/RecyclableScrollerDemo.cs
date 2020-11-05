@@ -68,10 +68,8 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
     {
         //Casting to the implemented Cell
         var item = cell as DemoCell;
-        item.ConfigureCell(_contactList[index],index);
+        item.ConfigureCell(_contactList[index], index);
     }
-    
+
     #endregion
 }
-
-

@@ -112,4 +112,5 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
 ```
  
  <b> Others:</b> <br>
- <b>Self-Initiaze</b>: The <i>Recyclable Scroll Rect</i> initializes on its own in its <i>Start</i> method. If you wish to initialize it yourself you can turn off the component's <i>self initialize</i> property and call the <i>Initialize</i> method whenever required. Make sure the Data-source is assigned before initializing.
+ <b>Self-Initiaze</b>: The <i>Recyclable Scroll Rect</i> initializes on its own in its <i>Start</i> method. If you wish to initialize it yourself you can turn off the component's <i>self initialize</i> property and call the <i>Initialize</i> method whenever required. Make sure the Data-source is assigned before initializing.<br><br>
+ <b>Reloading Data</b>: If a new data-source is asigned after initialization, call the <i>ReloadData()</i> function. Alternatively <i>ReloadData(IRecyclableScrollRectDataSource dataSource)</i> can also be used for assigning the data-source and reloading data at the same time.

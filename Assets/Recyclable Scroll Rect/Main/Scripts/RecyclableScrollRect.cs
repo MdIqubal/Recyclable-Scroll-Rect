@@ -46,7 +46,7 @@ namespace PolyAndCode.UI
         [SerializeField]
         private int _segments;
 
-        private RecyclingSystem _recyclableScrollRect;
+        private RecyclingSystem _recyclingSystem;
         private Vector2 _prevAnchoredPos;
 
         protected override void Start()
@@ -69,11 +69,11 @@ namespace PolyAndCode.UI
             //Contruct the recycling system.
             if (Direction == DirectionType.Vertical)
             {
-                _recyclableScrollRect = new VerticalRecyclingSystem(PrototypeCell, viewport, content, DataSource, IsGrid, Segments);
+                _recyclingSystem = new VerticalRecyclingSystem(PrototypeCell, viewport, content, DataSource, IsGrid, Segments);
             }
             else if (Direction == DirectionType.Horizontal)
             {
-                _recyclableScrollRect = new HorizontalRecyclingSystem(PrototypeCell, viewport, content, DataSource, IsGrid, Segments);
+                _recyclingSystem = new HorizontalRecyclingSystem(PrototypeCell, viewport, content, DataSource, IsGrid, Segments);
             }
             vertical = Direction == DirectionType.Vertical;
             horizontal = Direction == DirectionType.Horizontal;
@@ -81,7 +81,7 @@ namespace PolyAndCode.UI
             _prevAnchoredPos = content.anchoredPosition;
             onValueChanged.RemoveListener(OnValueChangedListener);
             //Adding listener after pool creation to avoid any unwanted recycling behaviour.(rare scenerio)
-            StartCoroutine(_recyclableScrollRect.InitCoroutine(() =>
+            StartCoroutine(_recyclingSystem.InitCoroutine(() =>
                                                                onValueChanged.AddListener(OnValueChangedListener)
                                                               ));
         }
@@ -103,8 +103,34 @@ namespace PolyAndCode.UI
         public void OnValueChangedListener(Vector2 normalizedPos)
         {
             Vector2 dir = content.anchoredPosition - _prevAnchoredPos;
-            m_ContentStartPosition += _recyclableScrollRect.OnValueChangedListener(dir);
+            m_ContentStartPosition += _recyclingSystem.OnValueChangedListener(dir);
             _prevAnchoredPos = content.anchoredPosition;
+        }
+
+        /// <summary>
+        ///Reloads the data. Call this if a new datasource is assigned.
+        /// </summary>
+        public void ReloadData()
+        {
+            ReloadData(DataSource);
+        }
+
+        /// <summary>
+        /// Overloaded ReloadData with dataSource param
+        ///Reloads the data. Call this if a new datasource is assigned.
+        /// </summary>
+        public void ReloadData(IRecyclableScrollRectDataSource dataSource)
+        {
+            if (_recyclingSystem != null)
+            {
+                StopMovement();
+                onValueChanged.RemoveListener(OnValueChangedListener);
+                _recyclingSystem.DataSource = dataSource;
+                StartCoroutine(_recyclingSystem.InitCoroutine(() =>
+                                                               onValueChanged.AddListener(OnValueChangedListener)
+                                                              ));
+                _prevAnchoredPos = content.anchoredPosition;
+            }
         }
 
         /*
