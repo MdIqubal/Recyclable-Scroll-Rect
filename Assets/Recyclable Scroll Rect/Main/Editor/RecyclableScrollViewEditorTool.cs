@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+
+using UnityEngine;
 using UnityEditor;
 
 namespace PolyAndCode.UI
@@ -33,3 +35,5 @@ namespace PolyAndCode.UI
         }
     }
 }
+
+#endif

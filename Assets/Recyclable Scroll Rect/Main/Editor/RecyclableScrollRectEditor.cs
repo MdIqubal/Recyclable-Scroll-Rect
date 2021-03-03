@@ -2,6 +2,8 @@
 //Copyright (c) 2020 Mohammed Iqubal Hussain
 //Website : Polyandcode.com 
 
+#if UNITY_EDITOR
+
 using UnityEngine.UI;
 using UnityEditor.AnimatedValues;
 using UnityEditor;
@@ -127,3 +129,5 @@ namespace PolyAndCode.UI
         }
     }
 }
+
+#endif
