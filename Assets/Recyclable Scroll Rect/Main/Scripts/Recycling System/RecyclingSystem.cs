@@ -16,6 +16,8 @@ namespace PolyAndCode.UI
 
         protected RectTransform Viewport, Content;
         protected RectTransform PrototypeCell;
+        protected RectOffset Padding;
+        protected float Spacing;
         protected bool IsGrid;
 
         protected float MinPoolCoverage = 1.5f; // The recyclable pool must cover (viewPort * _poolCoverage) area.

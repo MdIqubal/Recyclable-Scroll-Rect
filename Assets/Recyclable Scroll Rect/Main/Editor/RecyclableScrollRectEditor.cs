@@ -30,6 +30,8 @@ namespace PolyAndCode.UI
         SerializedProperty _protoTypeCell;
         SerializedProperty _selfInitialize;
         SerializedProperty _direction;
+        SerializedProperty _padding;
+        SerializedProperty _spacing;
         SerializedProperty _type;
 
         AnimBool m_ShowElasticity;
@@ -53,6 +55,8 @@ namespace PolyAndCode.UI
             _protoTypeCell = serializedObject.FindProperty("PrototypeCell");
             _selfInitialize = serializedObject.FindProperty("SelfInitialize");
             _direction = serializedObject.FindProperty("Direction");
+            _padding = serializedObject.FindProperty("Padding");
+            _spacing = serializedObject.FindProperty("Spacing");
             _type = serializedObject.FindProperty("IsGrid");
 
             m_ShowElasticity = new AnimBool(Repaint);
@@ -82,17 +86,18 @@ namespace PolyAndCode.UI
 
         public override void OnInspectorGUI()
         {
-            SetAnimBools(false); 
+            SetAnimBools(false);
             serializedObject.Update();
-          
+
             EditorGUILayout.PropertyField(_direction);
             EditorGUILayout.PropertyField(_type, new GUIContent("Grid"));
             if (_type.boolValue)
             {
                 string title = _direction.enumValueIndex == (int)RecyclableScrollRect.DirectionType.Vertical ? "Coloumns" : "Rows";
-               _script.Segments =  EditorGUILayout.IntField(title, _script.Segments);
+                _script.Segments = EditorGUILayout.IntField(title, _script.Segments);
             }
-
+            EditorGUILayout.PropertyField(_padding);
+            EditorGUILayout.PropertyField(_spacing);
             EditorGUILayout.PropertyField(_selfInitialize);
             EditorGUILayout.PropertyField(m_Viewport);
             EditorGUILayout.PropertyField(m_Content);
