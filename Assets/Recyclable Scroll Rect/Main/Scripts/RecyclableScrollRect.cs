@@ -31,6 +31,9 @@ namespace PolyAndCode.UI
 
         public DirectionType Direction;
 
+        public RectOffset Padding;
+        public float Spacing;
+
         //Segments : coloums for vertical and rows for horizontal.
         public int Segments
         {
@@ -69,11 +72,11 @@ namespace PolyAndCode.UI
             //Contruct the recycling system.
             if (Direction == DirectionType.Vertical)
             {
-                _recyclingSystem = new VerticalRecyclingSystem(PrototypeCell, viewport, content, DataSource, IsGrid, Segments);
+                _recyclingSystem = new VerticalRecyclingSystem(PrototypeCell, viewport, content, Padding, Spacing, DataSource, IsGrid, Segments);
             }
             else if (Direction == DirectionType.Horizontal)
             {
-                _recyclingSystem = new HorizontalRecyclingSystem(PrototypeCell, viewport, content, DataSource, IsGrid, Segments);
+                _recyclingSystem = new HorizontalRecyclingSystem(PrototypeCell, viewport, content, Padding, Spacing, DataSource, IsGrid, Segments);
             }
             vertical = Direction == DirectionType.Vertical;
             horizontal = Direction == DirectionType.Horizontal;
@@ -132,23 +135,5 @@ namespace PolyAndCode.UI
                 _prevAnchoredPos = content.anchoredPosition;
             }
         }
-
-        /*
-        #region Testing
-        private void OnDrawGizmos()
-        {
-            if (_recyclableScrollRect is VerticalRecyclingSystem)
-            {
-                ((VerticalRecyclingSystem)_recyclableScrollRect).OnDrawGizmos();
-            }
-
-            if (_recyclableScrollRect is HorizontalRecyclingSystem)
-            {
-                ((HorizontalRecyclingSystem)_recyclableScrollRect).OnDrawGizmos();
-            }
-
-        }
-        #endregion
-        */
     }
 }
