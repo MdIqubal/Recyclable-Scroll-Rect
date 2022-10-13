@@ -56,8 +56,8 @@ namespace PolyAndCode.UI
         {
             //defafult(built-in) in scroll rect can have both directions enabled, Recyclable scroll rect can be scrolled in only one direction.
             //setting default as vertical, Initialize() will set this again. 
-            vertical = true;
-            horizontal = false;
+            //vertical = true;
+            //horizontal = false;
 
             if (!Application.isPlaying) return;
 
@@ -84,9 +84,7 @@ namespace PolyAndCode.UI
             _prevAnchoredPos = content.anchoredPosition;
             onValueChanged.RemoveListener(OnValueChangedListener);
             //Adding listener after pool creation to avoid any unwanted recycling behaviour.(rare scenerio)
-            StartCoroutine(_recyclingSystem.InitCoroutine(() =>
-                                                               onValueChanged.AddListener(OnValueChangedListener)
-                                                              ));
+            _recyclingSystem.Init(() => onValueChanged.AddListener(OnValueChangedListener));
         }
 
         /// <summary>
@@ -129,9 +127,7 @@ namespace PolyAndCode.UI
                 StopMovement();
                 onValueChanged.RemoveListener(OnValueChangedListener);
                 _recyclingSystem.DataSource = dataSource;
-                StartCoroutine(_recyclingSystem.InitCoroutine(() =>
-                                                               onValueChanged.AddListener(OnValueChangedListener)
-                                                              ));
+                _recyclingSystem.Init(() => onValueChanged.AddListener(OnValueChangedListener));
                 _prevAnchoredPos = content.anchoredPosition;
             }
         }

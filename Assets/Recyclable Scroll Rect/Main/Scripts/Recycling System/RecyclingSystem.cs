@@ -24,7 +24,7 @@ namespace PolyAndCode.UI
         protected int MinPoolSize = 10; // Cell pool must have a min size
         protected float RecyclingThreshold = .2f; //Threshold for recycling above and below viewport
 
-        public abstract IEnumerator InitCoroutine(System.Action onInitialized = null);
+        public abstract void Init(System.Action onInitialized = null);
 
         public abstract Vector2 OnValueChangedListener(Vector2 direction);
     }

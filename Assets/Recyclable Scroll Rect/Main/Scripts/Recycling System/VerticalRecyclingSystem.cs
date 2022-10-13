@@ -58,11 +58,10 @@ namespace PolyAndCode.UI
         /// </summary>
         /// <param name="onInitialized">callback when init done</param>
         /// <returns></returns>>
-        public override IEnumerator InitCoroutine(System.Action onInitialized)
+        public override void Init(System.Action onInitialized)
         {
             SetTopAnchor(Content);
             Content.anchoredPosition = Vector3.zero;
-            yield return null;
             SetRecyclingBounds();
 
             //Cell Poool
