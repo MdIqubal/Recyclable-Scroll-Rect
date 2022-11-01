@@ -17,19 +17,6 @@ namespace PolyAndCode.UI
         //Assigned by constructor
         private readonly int _rows;
 
-        //Cell dimensions
-        private float _cellWidth, _cellHeight;
-
-        //Pool Generation
-        private List<RectTransform> _cellPool;
-        private List<ICell> _cachedCells;
-        private Bounds _recyclableViewBounds;
-
-
-        //Temps, Flags
-        private readonly Vector3[] _corners = new Vector3[4];
-        private bool _recycling;
-
         //Trackers
         private int currentItemCount; //item count corresponding to the datasource.
         private int leftMostCellIndex, rightMostCellIndex; //Topmost and bottommost cell in the List
