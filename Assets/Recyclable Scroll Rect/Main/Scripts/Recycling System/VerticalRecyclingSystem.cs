@@ -41,11 +41,13 @@ namespace PolyAndCode.UI
         private Vector2 zeroVector = Vector2.zero;
 
         #region INIT
-        public VerticalRecyclingSystem(RectTransform prototypeCell, RectTransform viewport, RectTransform content, IRecyclableScrollRectDataSource dataSource, bool isGrid, int coloumns)
+        public VerticalRecyclingSystem(RectTransform prototypeCell, RectTransform viewport, RectTransform content, RectOffset padding, float spacing, IRecyclableScrollRectDataSource dataSource, bool isGrid, int coloumns)
         {
             PrototypeCell = prototypeCell;
             Viewport = viewport;
             Content = content;
+            Padding = padding;
+            Spacing = spacing;
             DataSource = dataSource;
             IsGrid = isGrid;
             _coloumns = isGrid ? coloumns : 1;
@@ -74,7 +76,7 @@ namespace PolyAndCode.UI
 
             //Set content height according to no of rows
             int noOfRows = (int)Mathf.Ceil((float)_cellPool.Count / (float)_coloumns);
-            float contentYSize = noOfRows * _cellHeight;
+            float contentYSize = noOfRows * _cellHeight + (noOfRows - 1) * Spacing + Padding.top + Padding.bottom;
             Content.sizeDelta = new Vector2(Content.sizeDelta.x, contentYSize);
             SetTopAnchor(Content);
 
@@ -131,10 +133,10 @@ namespace PolyAndCode.UI
             float currentPoolCoverage = 0;
             int poolSize = 0;
             float posX = 0;
-            float posY = 0;
+            float posY = -Padding.top;
 
             //set new cell size according to its aspect ratio
-            _cellWidth = Content.rect.width / _coloumns;
+            _cellWidth = (Content.rect.width - Padding.left - Padding.right - (_coloumns - 1) * Spacing) / _coloumns;
             _cellHeight = PrototypeCell.sizeDelta.y / PrototypeCell.sizeDelta.x * _cellWidth;
 
             //Get the required pool coverage and mininum size for the Cell pool
@@ -153,20 +155,21 @@ namespace PolyAndCode.UI
 
                 if (IsGrid)
                 {
-                    posX = _bottomMostCellColoumn * _cellWidth;
+                    posX = _bottomMostCellColoumn * _cellWidth + _bottomMostCellColoumn * Spacing + Padding.left;
                     item.anchoredPosition = new Vector2(posX, posY);
                     if (++_bottomMostCellColoumn >= _coloumns)
                     {
                         _bottomMostCellColoumn = 0;
-                        posY -= _cellHeight;
-                        currentPoolCoverage += item.rect.height;
+                        posY -= _cellHeight + Spacing;
+                        currentPoolCoverage += item.rect.height + Spacing;
                     }
                 }
                 else
                 {
-                    item.anchoredPosition = new Vector2(0, posY);
-                    posY = item.anchoredPosition.y - item.rect.height;
-                    currentPoolCoverage += item.rect.height;
+                    posX = (Padding.left - Padding.right) / 2;
+                    item.anchoredPosition = new Vector2(posX, posY);
+                    posY = item.anchoredPosition.y - item.rect.height - Spacing;
+                    currentPoolCoverage += item.rect.height + Spacing;
                 }
 
                 //Setting data for Cell
@@ -263,12 +266,12 @@ namespace PolyAndCode.UI
                     {
                         n++;
                         _bottomMostCellColoumn = 0;
-                        posY = _cellPool[bottomMostCellIndex].anchoredPosition.y - _cellHeight;
+                        posY = _cellPool[bottomMostCellIndex].anchoredPosition.y - _cellHeight - Spacing;
                         additionalRows++;
                     }
 
                     //Move top cell to bottom
-                    posX = _bottomMostCellColoumn * _cellWidth;
+                    posX = _bottomMostCellColoumn * _cellWidth + _bottomMostCellColoumn * Spacing + Padding.left;
                     _cellPool[topMostCellIndex].anchoredPosition = new Vector2(posX, posY);
 
                     if (++_topMostCellColoumn >= _coloumns)
@@ -280,7 +283,7 @@ namespace PolyAndCode.UI
                 else
                 {
                     //Move top cell to bottom
-                    posY = _cellPool[bottomMostCellIndex].anchoredPosition.y - _cellPool[bottomMostCellIndex].sizeDelta.y;
+                    posY = _cellPool[bottomMostCellIndex].anchoredPosition.y - _cellPool[bottomMostCellIndex].sizeDelta.y - Spacing;
                     _cellPool[topMostCellIndex].anchoredPosition = new Vector2(_cellPool[topMostCellIndex].anchoredPosition.x, posY);
                 }
 
@@ -298,7 +301,7 @@ namespace PolyAndCode.UI
             //Content size adjustment 
             if (IsGrid)
             {
-                Content.sizeDelta += additionalRows * Vector2.up * _cellHeight;
+                Content.sizeDelta += additionalRows * Vector2.up * (_cellHeight + Spacing);
                 //TODO : check if it is supposed to be done only when > 0
                 if (additionalRows > 0)
                 {
@@ -307,10 +310,10 @@ namespace PolyAndCode.UI
             }
 
             //Content anchor position adjustment.
-            _cellPool.ForEach((RectTransform cell) => cell.anchoredPosition += n * Vector2.up * _cellPool[topMostCellIndex].sizeDelta.y);
-            Content.anchoredPosition -= n * Vector2.up * _cellPool[topMostCellIndex].sizeDelta.y;
+            _cellPool.ForEach((RectTransform cell) => cell.anchoredPosition += n * Vector2.up * _cellPool[topMostCellIndex].sizeDelta.y + n * Vector2.up * Spacing);
+            Content.anchoredPosition -= n * Vector2.up * _cellPool[topMostCellIndex].sizeDelta.y + n * Vector2.up * Spacing;
             _recycling = false;
-            return -new Vector2(0, n * _cellPool[topMostCellIndex].sizeDelta.y);
+            return -new Vector2(0, n * _cellPool[topMostCellIndex].sizeDelta.y + n * Spacing);
 
         }
 
@@ -337,12 +340,12 @@ namespace PolyAndCode.UI
                     {
                         n++;
                         _topMostCellColoumn = _coloumns - 1;
-                        posY = _cellPool[topMostCellIndex].anchoredPosition.y + _cellHeight;
+                        posY = _cellPool[topMostCellIndex].anchoredPosition.y + _cellHeight + Spacing;
                         additionalRows++;
                     }
 
                     //Move bottom cell to top
-                    posX = _topMostCellColoumn * _cellWidth;
+                    posX = _topMostCellColoumn * _cellWidth + _topMostCellColoumn * Spacing + Padding.left;
                     _cellPool[bottomMostCellIndex].anchoredPosition = new Vector2(posX, posY);
 
                     if (--_bottomMostCellColoumn < 0)
@@ -354,7 +357,7 @@ namespace PolyAndCode.UI
                 else
                 {
                     //Move bottom cell to top
-                    posY = _cellPool[topMostCellIndex].anchoredPosition.y + _cellPool[topMostCellIndex].sizeDelta.y;
+                    posY = _cellPool[topMostCellIndex].anchoredPosition.y + _cellPool[topMostCellIndex].sizeDelta.y + Spacing;
                     _cellPool[bottomMostCellIndex].anchoredPosition = new Vector2(_cellPool[bottomMostCellIndex].anchoredPosition.x, posY);
                     n++;
                 }
@@ -371,7 +374,7 @@ namespace PolyAndCode.UI
 
             if (IsGrid)
             {
-                Content.sizeDelta += additionalRows * Vector2.up * _cellHeight;
+                Content.sizeDelta += additionalRows * Vector2.up * (_cellHeight + Spacing);
                 //TODOL : check if it is supposed to be done only when > 0
                 if (additionalRows > 0)
                 {
@@ -379,10 +382,10 @@ namespace PolyAndCode.UI
                 }
             }
 
-            _cellPool.ForEach((RectTransform cell) => cell.anchoredPosition -= n * Vector2.up * _cellPool[topMostCellIndex].sizeDelta.y);
-            Content.anchoredPosition += n * Vector2.up * _cellPool[topMostCellIndex].sizeDelta.y;
+            _cellPool.ForEach((RectTransform cell) => cell.anchoredPosition -= n * Vector2.up * _cellPool[topMostCellIndex].sizeDelta.y + n * Vector2.up * Spacing);
+            Content.anchoredPosition += n * Vector2.up * _cellPool[topMostCellIndex].sizeDelta.y + n * Vector2.up * Spacing;
             _recycling = false;
-            return new Vector2(0, n * _cellPool[topMostCellIndex].sizeDelta.y);
+            return new Vector2(0, n * _cellPool[topMostCellIndex].sizeDelta.y + n * Spacing);
         }
         #endregion
 
