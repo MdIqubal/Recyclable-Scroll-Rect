@@ -25,5 +25,9 @@ namespace PolyAndCode.UI
         public abstract IEnumerator InitCoroutine(System.Action onInitialized = null);
 
         public abstract Vector2 OnValueChangedListener(Vector2 direction);
+
+        public abstract IEnumerator RecycleToCell(int index);
+    
+
     }
 }

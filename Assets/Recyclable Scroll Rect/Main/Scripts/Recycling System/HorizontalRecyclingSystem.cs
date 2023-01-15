@@ -89,6 +89,11 @@ namespace PolyAndCode.UI
             _recyclableViewBounds.max = new Vector3(_corners[2].x + threshHold, _corners[2].y);
         }
 
+        public override IEnumerator RecycleToCell(int index)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Creates cell Pool for recycling, Caches ICells
         /// </summary>

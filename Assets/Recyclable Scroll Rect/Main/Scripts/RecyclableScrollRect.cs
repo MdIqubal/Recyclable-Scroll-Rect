@@ -3,6 +3,7 @@
 //Website : Polyandcode.com 
 
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -105,6 +106,14 @@ namespace PolyAndCode.UI
             Vector2 dir = content.anchoredPosition - _prevAnchoredPos;
             m_ContentStartPosition += _recyclingSystem.OnValueChangedListener(dir);
             _prevAnchoredPos = content.anchoredPosition;
+        }
+
+        /// <summary>
+        /// Recycles all cells so they start at index. Use coroutine to wait if recycling system is initializing.
+        /// </summary>
+        public void JumpToCell(int index)
+        {
+            StartCoroutine(_recyclingSystem.RecycleToCell(index));
         }
 
         /// <summary>
