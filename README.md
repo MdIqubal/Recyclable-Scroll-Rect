@@ -1,12 +1,14 @@
 # Recyclable Scroll Rect
-
+Original Author:
 https://twitter.com/polyandcode<br>
 https://polyandcode.com || https://www.facebook.com/Polyandcode || https://www.instagram.com/polyandcode/
 
 ###Original version Available [here](https://assetstore.unity.com/packages/tools/gui/recyclable-scroll-rect-178560) on the Unity Asset Store
 
  ## Summary
-<b>UPDATE: Merged instant scroll to cell by index for vertical recycling by CosmicElysium and padding and offset to recycling view by KeyboardRules.</b><br><br>
+<b>UPDATE: Merged instant scroll to cell by index for vertical recycling by CosmicElysium and padding and offset to recycling view by KeyboardRules.
+Made Available as a git package, confirmed working in 2018.2.
+</b><br><br>
 
 
 
