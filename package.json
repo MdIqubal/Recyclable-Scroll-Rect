@@ -1,0 +1,10 @@
+{
+    "name": "com.polyandcode.recyclablescrollrect",
+    "displayName": "Recyclable Scroll Rect",
+    "version": "1.4.0",
+    "documentationUrl": "https://github.com/ParkingLotGames/Recyclable-Scroll-Rect",
+    "changelogUrl": "https://github.com/ParkingLotGames/Recyclable-Scroll-Rect/releases",
+    "licensesUrl": "https://github.com/ParkingLotGames/Recyclable-Scroll-Rect/blob/master/LICENSE",
+    "description": "2018.4+ Compatible.Recyclable Scroll Rect reuses or recycles the least number of cells required to fill the viewport which enables the implementation of lists with large number of items without any performance hit.",
+    "hideInEditor": false
+}
