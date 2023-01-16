@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using PolyAndCode.UI;
 
 /// <summary>
 /// Demo controller class for Recyclable Scroll Rect. 

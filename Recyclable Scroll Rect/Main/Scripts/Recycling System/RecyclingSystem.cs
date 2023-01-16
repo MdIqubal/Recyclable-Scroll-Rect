@@ -5,8 +5,7 @@
 
 using System.Collections;
 using UnityEngine;
-namespace PolyAndCode.UI
-{
+
     /// <summary>
     /// Absract Class for creating a Recycling system.
     /// </summary>
@@ -32,4 +31,3 @@ namespace PolyAndCode.UI
     
 
     }
-}

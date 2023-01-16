@@ -7,8 +7,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PolyAndCode.UI
-{
+
     /// <summary>
     /// Entry for the recycling system. Extends Unity's inbuilt ScrollRect.
     /// </summary>
@@ -145,4 +144,3 @@ namespace PolyAndCode.UI
             }
         }
     }
-}

@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace PolyAndCode.UI
-{
+
     [ExecuteInEditMode]
     public static class RecyclableScrollViewEditorTool
     {
@@ -32,4 +31,3 @@ namespace PolyAndCode.UI
             Undo.RegisterCreatedObjectUndo(item, "Create Recycalable Scroll view");
         }
     }
-}

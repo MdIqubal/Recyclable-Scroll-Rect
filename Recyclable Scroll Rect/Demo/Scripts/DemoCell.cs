@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using PolyAndCode.UI;
 
 //Cell class for demo. A cell in Recyclable Scroll Rect must have a cell class inheriting from ICell.
 //The class is required to configure the cell(updating UI elements etc) according to the data during recycling of cells.

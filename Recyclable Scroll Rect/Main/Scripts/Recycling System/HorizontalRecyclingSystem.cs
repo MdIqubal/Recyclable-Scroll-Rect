@@ -7,8 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PolyAndCode.UI
-{
+
     /// <summary>
     /// Recyling system for horizontal type.
     /// </summary>
@@ -390,4 +389,3 @@ namespace PolyAndCode.UI
         #endregion
 
     }
-}
