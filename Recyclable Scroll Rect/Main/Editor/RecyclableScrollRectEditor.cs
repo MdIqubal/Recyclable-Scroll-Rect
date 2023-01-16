@@ -7,7 +7,8 @@ using UnityEditor.AnimatedValues;
 using UnityEditor;
 using UnityEngine;
 
-
+namespace PolyAndCode.UI
+{
     [CustomEditor(typeof(RecyclableScrollRect), true)]
     [CanEditMultipleObjects]
     /// <summary>
@@ -130,3 +131,4 @@ using UnityEngine;
             serializedObject.ApplyModifiedProperties();
         }
     }
+}
