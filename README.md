@@ -1,5 +1,7 @@
 # Recyclable Scroll Rect
 Original Author:
+## TODO: Add scrollbar support
+
 https://twitter.com/polyandcode<br>
 https://polyandcode.com || https://www.facebook.com/Polyandcode || https://www.instagram.com/polyandcode/
 
