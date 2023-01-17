@@ -1,0 +1,12 @@
+{
+    "name": "RecyclableScrollRect.Editor",
+    "references": [
+        "RecyclableScrollRect"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

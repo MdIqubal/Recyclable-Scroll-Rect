@@ -1,0 +1,10 @@
+{
+    "name": "RecyclableScrollRect.Demo",
+    "references": [
+        "RecyclableScrollRect"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

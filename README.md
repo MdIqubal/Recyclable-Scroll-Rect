@@ -1,12 +1,18 @@
 # Recyclable Scroll Rect
-
+## TODO: Add scrollbar support
+Original Author:
 https://twitter.com/polyandcode<br>
 https://polyandcode.com || https://www.facebook.com/Polyandcode || https://www.instagram.com/polyandcode/
 
-### Available [here](https://assetstore.unity.com/packages/tools/gui/recyclable-scroll-rect-178560) on the Unity Asset Store
+###Original version Available [here](https://assetstore.unity.com/packages/tools/gui/recyclable-scroll-rect-178560) on the Unity Asset Store
 
  ## Summary
-<b>UPDATE : Recyclable Scroll Rect now supports Horizontal and Grid layout.</b><br><br>
+<b>UPDATE: Merged instant scroll to cell by index for vertical recycling by CosmicElysium and padding and offset to recycling view by KeyboardRules.
+Made Available as a git package, confirmed working in 2018.2.
+</b><br><br>
+
+
+
 Using the default Scroll-Rect to create lists with a huge number of items results in a laggy performance. Especially when creating a list with hundreds or thousands of items, it becomes impossible to use the Scroll Rect with the default approach i.e instantiating that many items. <i>Recyclable Scroll Rect</i> reuses or recycles the least number of cells required to fill the viewport. As a result, a huge number of items can be shown in the list without any performance hit. Vertical, Horizontal and Grid layouts are supported. 
 
 
