@@ -17,6 +17,8 @@ namespace PolyAndCode.UI
         public IRecyclableScrollRectDataSource DataSource;
 
         public bool IsGrid;
+        public bool IsLoop;
+        public bool IsReverse;
         //Prototype cell can either be a prefab or present as a child to the content(will automatically be disabled in runtime)
         public RectTransform PrototypeCell;
         //If true the intiziation happens at Start. Controller must assign the datasource in Awake.
@@ -72,11 +74,11 @@ namespace PolyAndCode.UI
             //Contruct the recycling system.
             if (Direction == DirectionType.Vertical)
             {
-                _recyclingSystem = new VerticalRecyclingSystem(PrototypeCell, viewport, content, Padding, Spacing, DataSource, IsGrid, Segments);
+                _recyclingSystem = new VerticalRecyclingSystem(PrototypeCell, viewport, content, Padding, Spacing, DataSource, IsGrid, IsLoop, IsReverse, Segments);
             }
             else if (Direction == DirectionType.Horizontal)
             {
-                _recyclingSystem = new HorizontalRecyclingSystem(PrototypeCell, viewport, content, Padding, Spacing, DataSource, IsGrid, Segments);
+                _recyclingSystem = new HorizontalRecyclingSystem(PrototypeCell, viewport, content, Padding, Spacing, DataSource, IsGrid, IsLoop, IsReverse, Segments);
             }
             vertical = Direction == DirectionType.Vertical;
             horizontal = Direction == DirectionType.Horizontal;

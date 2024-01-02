@@ -19,6 +19,8 @@ namespace PolyAndCode.UI
         protected RectOffset Padding;
         protected float Spacing;
         protected bool IsGrid;
+        protected bool IsLoop;
+        protected bool IsReverse;
 
         //Cell dimensions
         protected float _cellWidth, _cellHeight;
@@ -27,7 +29,7 @@ namespace PolyAndCode.UI
         protected List<RectTransform> _cellPool;
         protected List<ICell> _cachedCells;
         protected Bounds _recyclableViewBounds;
-        public List<ICell> CacheedCells => _cachedCells;
+        public List<ICell> CachedCells => _cachedCells;
 
         //Temps, Flags
         protected readonly Vector3[] _corners = new Vector3[4];

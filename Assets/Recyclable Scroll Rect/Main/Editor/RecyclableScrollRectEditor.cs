@@ -32,7 +32,9 @@ namespace PolyAndCode.UI
         SerializedProperty _direction;
         SerializedProperty _padding;
         SerializedProperty _spacing;
-        SerializedProperty _type;
+        SerializedProperty _grid;
+        SerializedProperty _loop;
+        SerializedProperty _reverse;
 
         AnimBool m_ShowElasticity;
         AnimBool m_ShowDecelerationRate;
@@ -57,7 +59,9 @@ namespace PolyAndCode.UI
             _direction = serializedObject.FindProperty("Direction");
             _padding = serializedObject.FindProperty("Padding");
             _spacing = serializedObject.FindProperty("Spacing");
-            _type = serializedObject.FindProperty("IsGrid");
+            _grid = serializedObject.FindProperty("IsGrid");
+            _loop = serializedObject.FindProperty("IsLoop");
+            _reverse = serializedObject.FindProperty("IsReverse");
 
             m_ShowElasticity = new AnimBool(Repaint);
             m_ShowDecelerationRate = new AnimBool(Repaint);
@@ -90,12 +94,18 @@ namespace PolyAndCode.UI
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(_direction);
-            EditorGUILayout.PropertyField(_type, new GUIContent("Grid"));
-            if (_type.boolValue)
+            EditorGUILayout.PropertyField(_grid, new GUIContent("Grid"));
+            if (_grid.boolValue)
             {
                 string title = _direction.enumValueIndex == (int)RecyclableScrollRect.DirectionType.Vertical ? "Coloumns" : "Rows";
                 _script.Segments = EditorGUILayout.IntField(title, _script.Segments);
             }
+            EditorGUILayout.PropertyField(_loop);
+            using (var scope = new EditorGUI.DisabledGroupScope(true))
+            {
+                EditorGUILayout.PropertyField(_reverse);
+            }
+
             EditorGUILayout.PropertyField(_padding);
             EditorGUILayout.PropertyField(_spacing);
             EditorGUILayout.PropertyField(_selfInitialize);
