@@ -30,17 +30,17 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
     //Recyclable scroll rect's data source must be assigned in Awake.
     private void Awake()
     {
-        InitData();
+        InitData(_dataLength);
         _recyclableScrollRect.DataSource = this;
     }
 
     //Initialising _contactList with dummy data 
-    private void InitData()
+    private void InitData(int length)
     {
         if (_contactList != null) _contactList.Clear();
 
         string[] genders = { "Male", "Female" };
-        for (int i = 0; i < _dataLength; i++)
+        for (int i = 0; i < length; i++)
         {
             ContactInfo obj = new ContactInfo();
             obj.Name = i + "_Name";
@@ -69,6 +69,17 @@ public class RecyclableScrollerDemo : MonoBehaviour, IRecyclableScrollRectDataSo
         //Casting to the implemented Cell
         var item = cell as DemoCell;
         item.ConfigureCell(_contactList[index], index);
+    }
+
+    /// <summary>
+    /// Data source method. Called for a cell when you wanna refresh cells.
+    /// /// Implement this method to do the necessary cell refresh.
+    /// </summary>
+    /// <param name="cell"></param>
+    public void RefreshCell(ICell cell)
+    {
+        var item = cell as DemoCell;
+        item.RefreshCell();
     }
 
     #endregion

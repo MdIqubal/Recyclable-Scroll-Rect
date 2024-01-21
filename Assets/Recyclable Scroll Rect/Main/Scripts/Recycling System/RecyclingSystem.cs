@@ -26,10 +26,15 @@ namespace PolyAndCode.UI
         protected float _cellWidth, _cellHeight;
 
         //Pool Generation
-        protected List<RectTransform> _cellPool;
+        protected List<RectTransform> _totalCellPool;
+        protected List<RectTransform> _cacheCellPool;
         protected List<ICell> _cachedCells;
         protected Bounds _recyclableViewBounds;
         public List<ICell> CachedCells => _cachedCells;
+
+        //Trackers
+        protected int _itemCount;
+        protected int _currentTopItem, _currentBottomItem;
 
         //Temps, Flags
         protected readonly Vector3[] _corners = new Vector3[4];
@@ -40,6 +45,9 @@ namespace PolyAndCode.UI
         protected float RecyclingThreshold = .2f; //Threshold for recycling above and below viewport
 
         public abstract void Init(System.Action onInitialized = null);
+        public abstract void Reset(System.Action onReset = null);
+        public abstract void Refresh(System.Action onRefresh = null);
+
 
         public abstract Vector2 OnValueChangedListener(Vector2 direction);
     }

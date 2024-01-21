@@ -12,5 +12,6 @@ namespace PolyAndCode.UI
     {
         int GetItemCount();
         void SetCell(ICell cell, int index);
+        void RefreshCell(ICell cell);
     }
 }

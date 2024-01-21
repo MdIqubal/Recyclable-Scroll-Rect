@@ -17,7 +17,7 @@ public class DemoCell : MonoBehaviour, ICell
     private ContactInfo _contactInfo;
     private int _cellIndex;
 
-    private void Start()
+    private void Awake()
     {
         //Can also be done in the inspector
         GetComponent<Button>().onClick.AddListener(ButtonListener);
@@ -33,8 +33,15 @@ public class DemoCell : MonoBehaviour, ICell
         genderLabel.text = contactInfo.Gender;
         idLabel.text = contactInfo.id;
     }
+    //This is called from RefreshCell method in DataSource
+    public void RefreshCell()
+    {
+        nameLabel.text = _contactInfo.Name;
+        genderLabel.text = _contactInfo.Gender;
+        idLabel.text = _contactInfo.id;
 
-    
+        Debug.Log("Refreshing Cell");
+    }
     private void ButtonListener()
     {
         Debug.Log("Index : " + _cellIndex +  ", Name : " + _contactInfo.Name  + ", Gender : " + _contactInfo.Gender);

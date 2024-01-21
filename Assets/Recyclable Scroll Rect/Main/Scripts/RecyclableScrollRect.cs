@@ -97,6 +97,22 @@ namespace PolyAndCode.UI
             DataSource = dataSource;
             Initialize();
         }
+        public void Reseting()
+        {
+            StopMovement(); 
+            _prevAnchoredPos = content.anchoredPosition;
+
+            onValueChanged.RemoveListener(OnValueChangedListener);
+            _recyclingSystem.Reset(()=> onValueChanged.AddListener(OnValueChangedListener));
+        }
+        public void Refreshing()
+        {
+            StopMovement();
+
+            onValueChanged.RemoveListener(OnValueChangedListener);
+            _recyclingSystem.Refresh(() => onValueChanged.AddListener(OnValueChangedListener));
+            
+        }
 
         /// <summary>
         /// Added as a listener to the OnValueChanged event of Scroll rect.
