@@ -591,7 +591,7 @@ MonoBehaviour:
     m_Right: 10
     m_Top: 10
     m_Bottom: 10
-  Spacing: 10
+  Spacing: {x: 30, y: 0}
   _segments: 3
 --- !u!114 &1611037274
 MonoBehaviour:

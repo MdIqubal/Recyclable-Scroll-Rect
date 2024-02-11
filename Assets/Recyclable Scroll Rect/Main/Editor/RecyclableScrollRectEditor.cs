@@ -100,6 +100,7 @@ namespace PolyAndCode.UI
                 string title = _direction.enumValueIndex == (int)RecyclableScrollRect.DirectionType.Vertical ? "Coloumns" : "Rows";
                 _script.Segments = EditorGUILayout.IntField(title, _script.Segments);
             }
+
             EditorGUILayout.PropertyField(_loop);
             using (var scope = new EditorGUI.DisabledGroupScope(true))
             {
@@ -107,7 +108,17 @@ namespace PolyAndCode.UI
             }
 
             EditorGUILayout.PropertyField(_padding);
-            EditorGUILayout.PropertyField(_spacing);
+
+            if (_grid.boolValue)
+            {
+                EditorGUILayout.PropertyField(_spacing);
+            }
+            else
+            {
+                float value = EditorGUILayout.FloatField("Spacing", _direction.enumValueIndex == (int)RecyclableScrollRect.DirectionType.Vertical ? _script.Spacing.y : _script.Spacing.x);
+                _script.Spacing = new Vector2(value,value);
+            }
+                
             EditorGUILayout.PropertyField(_selfInitialize);
             EditorGUILayout.PropertyField(m_Viewport);
             EditorGUILayout.PropertyField(m_Content);

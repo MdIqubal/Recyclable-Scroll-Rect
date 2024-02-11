@@ -34,7 +34,7 @@ namespace PolyAndCode.UI
         public DirectionType Direction;
 
         public RectOffset Padding;
-        public float Spacing;
+        public Vector2 Spacing;
 
         //Segments : coloums for vertical and rows for horizontal.
         public int Segments
